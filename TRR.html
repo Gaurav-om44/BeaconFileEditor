@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Replacement Form</title>
+    <style>
+        
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        label {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        input[type="text"], input[type="number"], input[type="date"] {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            box-sizing: border-box;
+        }
+        .step-container {
+            display: none;
+            padding: 20px;
+        }
+
+        .step-container.active {
+            display: block;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .buttons {
+            text-align: center;
+        }
+        button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .output {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <form  id="replacementForm">
+    <div class="step-container active" id="step-1">
+    <h1>Text Replacement Form</h1>
+    <div class="container">
+            <label for="beneficiaryID">Beneficiary ID (12):</label>
+            <input type="text" id="beneficiaryID" maxlength="12" required />
+
+            <label for="surname">Surname (12):</label>
+            <input type="text" id="surname" maxlength="12" required />
+
+            <label for="surname">FirstName (12):</label>
+            <input type="text" id="firstname" maxlength="12" required />
+
+            <label for="genderCode">Gender Code (1):</label>
+            <input type="text" id="genderCode" maxlength="1" required />
+
+            <label for="dob">Date of Birth (8):</label>
+            <input type="date" id="dob" required />
+
+            <label for="recordType">Record Type (1):</label>
+            <input type="text" id="recordType" maxlength="1" required />
+
+            <label for="contractNumber">Contract Number (5):</label>
+            <input type="text" id="contractNumber" maxlength="5" required />
+
+            <label for="stateCode">State Code (2):</label>
+            <input type="text" id="stateCode" maxlength="2" required />
+
+            <label for="countyCode">County Code (3):</label>
+            <input type="text" id="countyCode" maxlength="3" required />
+
+            <label for="disabilityIndicator">Disability Indicator (1):</label>
+            <input type="text" id="disabilityIndicator" maxlength="1" required />
+
+            <label for="hospiceIndicator">Hospice Indicator (1):</label>
+            <input type="text" id="hospiceIndicator" maxlength="1" required />
+
+       
+
+        <div class="output">
+            <h3>Updated File Content:</h3>
+            <pre id="fileContent">
+            </pre>
+        </div>
+    </div>
+
+    <div class="buttons">
+        <button type="button" onclick="nextStep()">Next</button>
+     </div>
+    
+
+   </div>
+   
+   <div class="step-container" id="step-2">
+    <label for="institutionalIndicator">Institutional/NHC/HCBS Indicator:</label>
+    <input type="text" id="institutionalIndicator"><br><br>
+
+    <label for="esrdIndicator">ESRD Indicator:</label>
+    <input type="text" id="esrdIndicator"><br><br>
+
+    <label for="transactionReplyCode">Transaction Reply Code:</label>
+    <input type="text" id="transactionReplyCode"><br><br>
+
+    <label for="transactionCode">Transaction Code:</label>
+    <input type="text" id="transactionCode"><br><br>
+
+    <label for="entitlementTypeCode">Entitlement Type Code:</label>
+    <input type="text" id="entitlementTypeCode"><br><br>
+
+    <label for="effectiveDate">Effective Date:</label>
+    <input type="text" id="effectiveDate"><br><br>
+    
+    <div class="buttons">
+    <button type="button" onclick="prevStep()">Previous</button>
+    <button type="button" onclick="nextStep()">Next</button>
+</div>
+
+
+</div>
+
+<div class="step-container" id="step-3">
+    <label for="waIndicator">WA Indicator:</label>
+    <input type="text" id="waIndicator" name="waIndicator"><br>
+
+    <label for="planBenefitPackageID">Plan Benefit Package ID:</label>
+    <input type="text" id="planBenefitPackageID" name="planBenefitPackageID"><br>
+
+    <label for="filler">Filler:</label>
+    <input type="text" id="filler" name="filler"><br>
+
+    <label for="transactionDate">Transaction Date:</label>
+    <input type="text" id="transactionDate" name="transactionDate"><br>
+
+    <label for="uiInitiatedChangeFlag">UI Initiated Change Flag:</label>
+    <input type="text" id="uiInitiatedChangeFlag" name="uiInitiatedChangeFlag"><br>
+
+    <label for="effectiveDateDisenrollment">Effective Date of the Disenrollment:</label>
+    <input type="text" id="effectiveDateDisenrollment" name="effectiveDateDisenrollment"><br>
+
+    <label for="newEnrollmentEffectiveDate">New Enrollment Effective Date:</label>
+    <input type="text" id="newEnrollmentEffectiveDate" name="newEnrollmentEffectiveDate"><br>
+
+    <label for="claimNumberOld">Claim Number (Old):</label>
+    <input type="text" id="claimNumberOld" name="claimNumberOld"><br>
+
+    <label for="dateOfDeath">Date of Death:</label>
+    <input type="text" id="dateOfDeath" name="dateOfDeath"><br>
+
+    <label for="hospiceEndDate">Hospice End Date:</label>
+    <input type="text" id="hospiceEndDate" name="hospiceEndDate"><br>
+
+    <label for="esrdStartDate">ESRD Start Date:</label>
+    <input type="text" id="esrdStartDate" name="esrdStartDate"><br>
+
+    <label for="esrdEndDate">ESRD End Date:</label>
+    <input type="text" id="esrdEndDate" name="esrdEndDate"><br>
+
+    <label for="medicaidEndDate">Medicaid End Date:</label>
+    <input type="text" id="medicaidEndDate" name="medicaidEndDate"><br>
+
+    <label for="partAEndDate">Part A End Date:</label>
+    <input type="text" id="partAEndDate" name="partAEndDate"><br>
+
+    <label for="waStartDate">WA Start Date:</label>
+    <input type="text" id="waStartDate" name="waStartDate"><br>
+
+    <label for="waEndDate">WA End Date:</label>
+    <input type="text" id="waEndDate" name="waEndDate"><br>
+
+    <label for="partAReinstateDate">Part A Reinstate Date:</label>
+    <input type="text" id="partAReinstateDate" name="partAReinstateDate"><br>
+
+    <label for="partBEndDate">Part B End Date:</label>
+    <input type="text" id="partBEndDate" name="partBEndDate"><br>
+
+    <label for="partBReinstateDate">Part B Reinstate Date:</label>
+    <input type="text" id="partBReinstateDate" name="partBReinstateDate"><br>
+
+    <label for="oldStateCountyCodes">Old State and County Codes:</label>
+    <input type="text" id="oldStateCountyCodes" name="oldStateCountyCodes"><br>
+    <div class="buttons">
+        <button type="button" onclick="prevStep()">Previous</button>
+        
+    </div>
+</div>
+<button  type="submit">Submit & Download</button>
+</form>
+ <script>
+         let currentStep = 1;
+
+function nextStep() {
+    document.getElementById(`step-${currentStep}`).classList.remove('active');
+    currentStep++;
+    document.getElementById(`step-${currentStep}`).classList.add('active');
+}
+
+function prevStep() {
+    document.getElementById(`step-${currentStep}`).classList.remove('active');
+    currentStep--;
+    document.getElementById(`step-${currentStep}`).classList.add('active');
+}
+        document.getElementById('replacementForm').addEventListener('submit', function(event) {
+            event.preventDefault();  // Prevent form submission
+
+            // Get input values
+            const beneficiaryID = document.getElementById('beneficiaryID').value.padEnd(12, ' ');
+            const surname = document.getElementById('surname').value.padEnd(12, ' ');
+            const firstname = document.getElementById('firstname').value.padEnd(12, ' ');
+            const genderCode = document.getElementById('genderCode').value;
+            const dob = document.getElementById('dob').value.replace(/-/g, '');  // Format date as YYYYMMDD
+            const recordType = document.getElementById('recordType').value;
+            const contractNumber = document.getElementById('contractNumber').value.padEnd(5, ' ');
+            const stateCode = document.getElementById('stateCode').value;
+            const countyCode = document.getElementById('countyCode').value;
+            const disabilityIndicator = document.getElementById('disabilityIndicator').value;
+            const hospiceIndicator = document.getElementById('hospiceIndicator').value;
+            const institutionalIndicator = document.getElementById('institutionalIndicator').value;
+            const esrdIndicator = document.getElementById('esrdIndicator').value;
+            const transactionReplyCode = document.getElementById('transactionReplyCode').value;
+            const transactionCode = document.getElementById('transactionCode').value;
+            const entitlementTypeCode = document.getElementById('entitlementTypeCode').value;
+            const effectiveDate = document.getElementById('effectiveDate').value;
+            const waIndicator = document.getElementById('waIndicator').value;
+            const planBenefitPackageID = document.getElementById('planBenefitPackageID').value;
+            const filler = document.getElementById('filler').value;
+            const transactionDate = document.getElementById('transactionDate').value;
+            const uiInitiatedChangeFlag = document.getElementById('uiInitiatedChangeFlag').value;
+            const effectiveDateDisenrollment = document.getElementById('effectiveDateDisenrollment').value;
+            const newEnrollmentEffectiveDate = document.getElementById('newEnrollmentEffectiveDate').value;
+            const claimNumberOld = document.getElementById('claimNumberOld').value;
+            const dateOfDeath = document.getElementById('dateOfDeath').value;
+            const hospiceEndDate = document.getElementById('hospiceEndDate').value;
+            const esrdStartDate = document.getElementById('esrdStartDate').value;
+            const esrdEndDate = document.getElementById('esrdEndDate').value;
+            const medicaidEndDate = document.getElementById('medicaidEndDate').value;
+            const partAEndDate = document.getElementById('partAEndDate').value;
+            const waStartDate = document.getElementById('waStartDate').value;
+            const waEndDate = document.getElementById('waEndDate').value;
+            const partAReinstateDate = document.getElementById('partAReinstateDate').value;
+            const partBEndDate = document.getElementById('partBEndDate').value;
+            const partBReinstateDate = document.getElementById('partBReinstateDate').value;
+            const oldStateCountyCodes = document.getElementById('oldStateCountyCodes').value;
+
+           
+
+            // Original file content (as a string)
+            let fileContent = `2GP3GP4GP11 SWIFT       TAYLOR F119530402TH17482320000  01161 202501010010 202310230                               H1748   2023100601N00000000.0000000.00UJ N006Y 19.22.56.782491        000                                                           0000.00 0000.00 0000.00 0000.00                                                                    0000.00            ENROLL ACCEPTED                                                                                  Y             0317975024HCF054028567441`
+
+            // Replace values at the specified positions
+            fileContent = replaceAtPosition(fileContent, beneficiaryID, 0, 12);
+            fileContent = replaceAtPosition(fileContent, surname, 12, 24);
+            fileContent = replaceAtPosition(fileContent, firstname, 24, 32);
+            fileContent = replaceAtPosition(fileContent, genderCode, 32, 33);
+            fileContent = replaceAtPosition(fileContent, dob, 33, 41);
+            fileContent = replaceAtPosition(fileContent, recordType, 41, 42);
+            fileContent = replaceAtPosition(fileContent, contractNumber, 42, 47);
+            fileContent = replaceAtPosition(fileContent, stateCode, 47, 49);
+            fileContent = replaceAtPosition(fileContent, countyCode, 49, 52);
+            fileContent = replaceAtPosition(fileContent, disabilityIndicator, 52, 53);
+            fileContent = replaceAtPosition(fileContent, hospiceIndicator, 53, 54);
+            fileContent = replaceAtPosition(fileContent, institutionalIndicator, 54, 55);
+            fileContent = replaceAtPosition(fileContent, esrdIndicator, 55, 56);
+            fileContent = replaceAtPosition(fileContent, transactionReplyCode, 56, 59); 
+            fileContent = replaceAtPosition(fileContent, transactionCode, 59, 61); 
+            fileContent = replaceAtPosition(fileContent, entitlementTypeCode, 61, 62);
+            fileContent = replaceAtPosition(fileContent, effectiveDate, 62, 70); 
+            fileContent = replaceAtPosition(fileContent, institutionalIndicator, 54, 55);
+            fileContent = replaceAtPosition(fileContent, esrdIndicator, 55, 56);
+            fileContent = replaceAtPosition(fileContent, transactionReplyCode, 56, 59); 
+            fileContent = replaceAtPosition(fileContent, transactionCode, 59, 61);
+            fileContent = replaceAtPosition(fileContent, entitlementTypeCode, 61, 62); 
+            fileContent = replaceAtPosition(fileContent, effectiveDate, 62, 70); 
+            fileContent = replaceAtPosition(fileContent, waIndicator, 70, 71);
+            fileContent = replaceAtPosition(fileContent, planBenefitPackageID, 71, 74);
+            fileContent = replaceAtPosition(fileContent, filler, 74, 75);
+            fileContent = replaceAtPosition(fileContent, transactionDate, 75, 83);
+            fileContent = replaceAtPosition(fileContent, uiInitiatedChangeFlag, 83, 84);
+            fileContent = replaceAtPosition(fileContent, effectiveDateDisenrollment, 84, 92);
+            fileContent = replaceAtPosition(fileContent, newEnrollmentEffectiveDate, 84, 92);
+            fileContent = replaceAtPosition(fileContent, claimNumberOld, 84, 96);
+            fileContent = replaceAtPosition(fileContent, dateOfDeath, 84, 92);
+            fileContent = replaceAtPosition(fileContent, hospiceEndDate, 84, 92);
+            fileContent = replaceAtPosition(fileContent, esrdStartDate, 84, 92);
+            fileContent = replaceAtPosition(fileContent, esrdEndDate, 84, 92);
+            fileContent = replaceAtPosition(fileContent, medicaidEndDate, 84, 92);
+            fileContent = replaceAtPosition(fileContent, partAEndDate, 84, 92);
+            fileContent = replaceAtPosition(fileContent, waStartDate, 84, 92);
+            fileContent = replaceAtPosition(fileContent, waEndDate, 84, 92);
+            fileContent = replaceAtPosition(fileContent, partAReinstateDate, 84, 92);
+            fileContent = replaceAtPosition(fileContent, partBEndDate, 84, 92);
+            fileContent = replaceAtPosition(fileContent, partBReinstateDate, 84, 92);
+            fileContent = replaceAtPosition(fileContent, oldStateCountyCodes, 84, 89);
+
+
+
+
+            // Display updated file content
+            document.getElementById('fileContent').textContent = fileContent;
+
+            // Trigger file download
+            downloadFile(fileContent, 'updatedFile.txt');
+        });
+
+        // Helper function to replace content at specific positions
+        function replaceAtPosition(str, replacement, start, end) {
+            return str.substring(0, start) + replacement + str.substring(end);
+        }
+
+        // Helper function to download the file
+        function downloadFile(content, filename) {
+            const blob = new Blob([content], { type: 'text/plain' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = filename;
+            link.click();
+        }
+    </script>
+</body>
+</html>

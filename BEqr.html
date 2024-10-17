@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Maker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        input[type="file"] {
+            display: block;
+            margin-top: 10px;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #status {
+            margin-top: 20px;
+            font-weight: bold;
+            color: green;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Beacon Enrollment Manager Demo file Maker</h1>
+    <div class="container">
+        <h1>BEQR Maker</h1>
+        <form id="fileForm">
+            <!-- Input for source file -->
+            <label for="sourceFile">Select Source File:</label>
+            <input type="file" id="sourceFile" required accept=".txt">
+
+            <!-- Input for target file -->
+            <label for="targetFile">Select Target File:</label>
+            <input type="file" id="targetFile" required accept=".txt">
+
+            <label for="FirstName">FirstName:</label>
+            <input type="text" id="FirstName" required accept=".txt">
+
+            <label for="LastName">LastName:</label>
+            <input type="text" id="LastName" required accept=".txt">
+
+            <!-- Replace Button -->
+            <button type="submit">Replace Fields</button>
+        </form>
+
+        <!-- Status message -->
+        <p id="status"></p>
+    </div>
+
+    <!-- External JavaScript file -->
+    <script src="./index.js">
+      
+    </script>
+</body>
+</html>
