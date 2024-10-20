@@ -70,37 +70,37 @@
     <h1>Text Replacement Form</h1>
     <div class="container">
             <label for="beneficiaryID">Beneficiary ID (12):</label>
-            <input type="text" id="beneficiaryID" maxlength="12" required />
+            <input type="text" id="beneficiaryID" maxlength="12"  />
 
             <label for="surname">Surname (12):</label>
-            <input type="text" id="surname" maxlength="12" required />
+            <input type="text" id="surname" maxlength="12"  />
 
             <label for="surname">FirstName (12):</label>
-            <input type="text" id="firstname" maxlength="12" required />
+            <input type="text" id="firstname" maxlength="12"  />
 
             <label for="genderCode">Gender Code (1):</label>
-            <input type="text" id="genderCode" maxlength="1" required />
+            <input type="text" id="genderCode" maxlength="1"  />
 
             <label for="dob">Date of Birth (8):</label>
-            <input type="date" id="dob" required />
+            <input type="date" id="dob"  />
 
             <label for="recordType">Record Type (1):</label>
-            <input type="text" id="recordType" maxlength="1" required />
+            <input type="text" id="recordType" maxlength="1"  />
 
             <label for="contractNumber">Contract Number (5):</label>
-            <input type="text" id="contractNumber" maxlength="5" required />
+            <input type="text" id="contractNumber" maxlength="5"  />
 
             <label for="stateCode">State Code (2):</label>
-            <input type="text" id="stateCode" maxlength="2" required />
+            <input type="text" id="stateCode" maxlength="2"  />
 
             <label for="countyCode">County Code (3):</label>
-            <input type="text" id="countyCode" maxlength="3" required />
+            <input type="text" id="countyCode" maxlength="3"  />
 
             <label for="disabilityIndicator">Disability Indicator (1):</label>
-            <input type="text" id="disabilityIndicator" maxlength="1" required />
+            <input type="text" id="disabilityIndicator" maxlength="1"  />
 
             <label for="hospiceIndicator">Hospice Indicator (1):</label>
-            <input type="text" id="hospiceIndicator" maxlength="1" required />
+            <input type="text" id="hospiceIndicator" maxlength="1"  />
 
        
 
@@ -134,8 +134,8 @@
     <label for="entitlementTypeCode">Entitlement Type Code:</label>
     <input type="text" id="entitlementTypeCode"><br><br>
 
-    <label for="effectiveDate">Effective Date:</label>
-    <input type="text" id="effectiveDate"><br><br>
+    <label for="effectiveDate">Date of Birth (8):</label>
+    <input type="date" id="effectiveDate"  />
     
     <div class="buttons">
     <button type="button" onclick="prevStep()">Previous</button>
@@ -162,7 +162,7 @@
     <input type="text" id="uiInitiatedChangeFlag" name="uiInitiatedChangeFlag"><br>
 
     <label for="effectiveDateDisenrollment">Effective Date of the Disenrollment:</label>
-    <input type="text" id="effectiveDateDisenrollment" name="effectiveDateDisenrollment"><br>
+    <input type="date" value="2024-04-23" id="effectiveDateDisenrollment" name="effectiveDateDisenrollment"><br>
 
     <label for="newEnrollmentEffectiveDate">New Enrollment Effective Date:</label>
     <input type="text" id="newEnrollmentEffectiveDate" name="newEnrollmentEffectiveDate"><br>
@@ -171,7 +171,7 @@
     <input type="text" id="claimNumberOld" name="claimNumberOld"><br>
 
     <label for="dateOfDeath">Date of Death:</label>
-    <input type="text" id="dateOfDeath" name="dateOfDeath"><br>
+    <input type="text" value="2025-04-01" id="dateOfDeath" name="dateOfDeath"><br>
 
     <label for="hospiceEndDate">Hospice End Date:</label>
     <input type="text" id="hospiceEndDate" name="hospiceEndDate"><br>
@@ -211,6 +211,7 @@
     </div>
 </div>
 <button  type="submit">Submit & Download</button>
+<h3 id="fileContent"></h3>
 </form>
  <script>
          let currentStep = 1;
@@ -233,10 +234,10 @@ function prevStep() {
             const beneficiaryID = document.getElementById('beneficiaryID').value.padEnd(12, ' ');
             const surname = document.getElementById('surname').value.padEnd(12, ' ');
             const firstname = document.getElementById('firstname').value.padEnd(12, ' ');
-            const genderCode = document.getElementById('genderCode').value;
+            const genderCode = document.getElementById('genderCode').value.padEnd(1, ' ');
             const dob = document.getElementById('dob').value.replace(/-/g, '');  // Format date as YYYYMMDD
-            const recordType = document.getElementById('recordType').value;
-            const contractNumber = document.getElementById('contractNumber').value.padEnd(5, ' ');
+            const recordType = document.getElementById('recordType').value.padEnd(1, ' ');
+            const contractNumber = document.getElementById('contractNumber').value.padEnd(5,' ');
             const stateCode = document.getElementById('stateCode').value;
             const countyCode = document.getElementById('countyCode').value;
             const disabilityIndicator = document.getElementById('disabilityIndicator').value;
@@ -246,7 +247,7 @@ function prevStep() {
             const transactionReplyCode = document.getElementById('transactionReplyCode').value;
             const transactionCode = document.getElementById('transactionCode').value;
             const entitlementTypeCode = document.getElementById('entitlementTypeCode').value;
-            const effectiveDate = document.getElementById('effectiveDate').value;
+            const effectiveDate = document.getElementById('effectiveDate').value.replace(/-/g, '');
             const waIndicator = document.getElementById('waIndicator').value;
             const planBenefitPackageID = document.getElementById('planBenefitPackageID').value;
             const filler = document.getElementById('filler').value;
@@ -271,8 +272,7 @@ function prevStep() {
            
 
             // Original file content (as a string)
-            let fileContent = `2GP3GP4GP11 SWIFT       TAYLOR F119530402TH17482320000  01161 202501010010 202310230                               H1748   2023100601N00000000.0000000.00UJ N006Y 19.22.56.782491        000                                                           0000.00 0000.00 0000.00 0000.00                                                                    0000.00            ENROLL ACCEPTED                                                                                  Y             0317975024HCF054028567441`
-
+             let fileContent = `2GP3GP4GP11 SWIFT       TAYLOR F119530402TH17482320000  01161 202501010010 202310230                               H1748   2023100601N00000000.0000000.00UJ N006Y 19.22.56.782491        000                                                           0000.00 0000.00 0000.00 0000.00                                                                    0000.00            ENROLL ACCEPTED                                                                                  Y             0317975024HCF054028567441`
             // Replace values at the specified positions
             fileContent = replaceAtPosition(fileContent, beneficiaryID, 0, 12);
             fileContent = replaceAtPosition(fileContent, surname, 12, 24);
@@ -281,10 +281,11 @@ function prevStep() {
             fileContent = replaceAtPosition(fileContent, dob, 33, 41);
             fileContent = replaceAtPosition(fileContent, recordType, 41, 42);
             fileContent = replaceAtPosition(fileContent, contractNumber, 42, 47);
-            fileContent = replaceAtPosition(fileContent, stateCode, 47, 49);
-            fileContent = replaceAtPosition(fileContent, countyCode, 49, 52);
-            fileContent = replaceAtPosition(fileContent, disabilityIndicator, 52, 53);
+            fileContent = replaceAtPosition(fileContent, stateCode,47, 49);
+            fileContent = replaceAtPosition(fileContent, countyCode,49, 52);
+            fileContent = replaceAtPosition(fileContent, disabilityIndicator,52, 53);
             fileContent = replaceAtPosition(fileContent, hospiceIndicator, 53, 54);
+            fileContent = replaceAtPosition(fileContent, effectiveDate, 62, 70);
             fileContent = replaceAtPosition(fileContent, institutionalIndicator, 54, 55);
             fileContent = replaceAtPosition(fileContent, esrdIndicator, 55, 56);
             fileContent = replaceAtPosition(fileContent, transactionReplyCode, 56, 59); 
@@ -316,7 +317,7 @@ function prevStep() {
             fileContent = replaceAtPosition(fileContent, partAReinstateDate, 84, 92);
             fileContent = replaceAtPosition(fileContent, partBEndDate, 84, 92);
             fileContent = replaceAtPosition(fileContent, partBReinstateDate, 84, 92);
-            fileContent = replaceAtPosition(fileContent, oldStateCountyCodes, 84, 89);
+            fileContent = replaceAtPosition(fileContent, oldStateCountyCodes, 84, 82);
 
 
 
@@ -325,13 +326,17 @@ function prevStep() {
             document.getElementById('fileContent').textContent = fileContent;
 
             // Trigger file download
-            downloadFile(fileContent, 'updatedFile.txt');
+
+        downloadFile(fileContent, 'updatedFile.txt');
         });
 
         // Helper function to replace content at specific positions
         function replaceAtPosition(str, replacement, start, end) {
-            return str.substring(0, start) + replacement + str.substring(end);
+            let temp = " ".repeat((end-start) - replacement.length)
+            return str.substring(0, start) + replacement + temp + str.substring(end);
         }
+
+       
 
         // Helper function to download the file
         function downloadFile(content, filename) {

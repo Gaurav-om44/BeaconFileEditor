@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Maker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        input[type="file"] {
+            display: block;
+            margin-top: 10px;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #status {
+            margin-top: 20px;
+            font-weight: bold;
+            color: green;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Beacon Enrollment Manager Demo file Maker</h1>
+    <div class="container">
+        <h1>TRR Prepare(Enrollment)</h1>
+        <form id="replacementForm">
+            <!-- Input for source file -->
+
+            <label for="FirstName">FirstName:</label>
+            <input type="text" id="FirstName" >
+
+            <label for="LastName">LastName:</label>
+            <input type="text" id="LastName" >
+
+            <label for="contractNo">Contract No:</label>
+            <input type="text" id="contractno">
+
+            <label for="PBP">PBP:</label>
+            <input type="text" id="PBP">
+
+            <label for="MBI">MBI</label>
+            <input type="text" id="MBI">
+
+            <label for="effectiveDate">Effective date:</label>
+            <input type="date" value="2025-12-23" id="effectiveDate"> 
+             
+            <label for="Dob">Date of birth:</label>
+            <input type="date" value="2025-12-23" id="Dob"> 
+
+            <!-- Replace Button -->
+            <button type="submit">Replace Fields</button>
+        </form>
+
+        <!-- Status message -->
+        <p id="status"></p>
+    </div>
+
+    <!-- External JavaScript file -->
+    <script >
+        document.getElementById('replacementForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+    // event.preventDefault(); 
+
+
+    const MBI = document.getElementById('MBI').value;
+    const surname = document.getElementById('LastName').value;
+    const firstname = document.getElementById('FirstName').value;
+    const effectiveDate = document.getElementById('effectiveDate').value.replace(/-/g, '');
+    const contractNumber = document.getElementById('contractno').value;
+    const PBP = document.getElementById('PBP').value;
+    const dob = document.getElementById('Dob').value.replace(/-/g, '');  // Format date as YYYYMMDD
+
+    let fileContent = `2GP3GP4GP11 SWIFT       TAYLOR F119530402TH17482320000  01161 202501010010 202310230                               H1748   2023100601N00000000.0000000.00UJ N006Y 19.22.56.782491        000                                                           0000.00 0000.00 0000.00 0000.00                                                                    0000.00            ENROLL ACCEPTED                                                                                  Y             0317975024HCF054028567441
+
+`
+
+    // Replace values at the specified positions
+    fileContent = replaceAtPosition(fileContent, MBI, 0, 11);
+    fileContent = replaceAtPosition(fileContent, surname, 12, 24);
+    fileContent = replaceAtPosition(fileContent, firstname, 24, 31);
+    fileContent = replaceAtPosition(fileContent, dob, 33, 41);
+    fileContent = replaceAtPosition(fileContent, contractNumber,42, 47);
+    fileContent = replaceAtPosition(fileContent, effectiveDate,62, 70);
+    fileContent = replaceAtPosition(fileContent, PBP, 71, 74);
+    
+    
+    
+    
+
+    downloadFile(fileContent,`trr.txt`);
+    console.log(fileContent);
+
+});
+function replaceAtPosition(str, replacement, start, end) {
+
+    let temp = " ".repeat((end-start) - replacement.length);
+    return str.substring(0, start) + replacement + temp + str.substring(end);
+}
+
+
+    function downloadFile(content, filename) {
+    const blob = new Blob([content], { type: 'text/plain' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = filename;
+    link.click();
+   
+}
+      
+    </script>
+</body>
+</html>
